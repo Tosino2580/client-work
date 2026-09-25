@@ -79,8 +79,8 @@ export default function Contact() {
     },
     {
       name: 'Email',
-      value: 'kasiebodymassage@gmail.com',
-      href: 'mailto:kasiebodymassage@gmail.com',
+      value: 'Kasiebodywork@gmail.com',
+      href: 'mailto:Kasiebodywork@gmail.com',
       bgColor: 'bg-sky-50',
       icon: <Mail className="w-4 h-4 text-sky-600" />,
     },

@@ -97,10 +97,10 @@ export default function Footer({ onNavigate }) {
                 +1 (716) 287-0729
               </a>
               <a
-                href="mailto:kasierubdown@gmail.com"
+                href="mailto:Kasiebodywork@gmail.com"
                 className="text-gray-300 hover:text-white transition-colors block"
               >
-                kasierubdown@gmail.com
+                Kasiebodywork@gmail.com
               </a>
             </div>
 
@@ -117,7 +117,7 @@ export default function Footer({ onNavigate }) {
         {/* Centered Copyright Notice */}
         <div className="text-center">
           <p className="text-xs text-gray-500 tracking-wide">
-            &copy; 2025 Kasie Rub Down. All rights reserved.
+            &copy; 2025 Kasie BodyWork. All rights reserved.
           </p>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function Logo({ isScrolled = false, className = '' }) {
             isScrolled ? 'text-gray-800' : 'text-gray-200'
           }`}
         >
-          Rub Down
+          BodyWork
         </span>
       </div>
     </a>
