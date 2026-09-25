@@ -72,7 +72,7 @@ export default function FullGallery({ onBackToHome }) {
 
         <div className="flex items-center gap-4">
           <a
-            href="#book"
+            href="#contact"
             onClick={onBackToHome}
             className="inline-flex items-center justify-center px-7 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#e28775] to-[#cf6e5b] hover:from-[#efa394] hover:to-[#e28775] shadow-lg shadow-[#e28775]/25 transition-all"
           >

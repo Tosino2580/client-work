@@ -82,7 +82,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full sm:w-auto hero-cta">
           {/* Primary CTA with pulse ring */}
           <a
-            href="#book"
+            href="#contact"
             className="relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full text-[15px] font-semibold text-white bg-gradient-to-r from-[#e28775] to-[#cf6e5b] hover:from-[#efa394] hover:to-[#e28775] shadow-[0_4px_20px_rgba(226,135,117,0.4)] hover:shadow-[0_6px_28px_rgba(226,135,117,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 btn-ripple pulse-ring"
           >
             <span>Book Your Escape</span>
