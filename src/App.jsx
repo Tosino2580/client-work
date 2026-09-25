@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Rates from './components/Rates';
+import Sanctuary from './components/Sanctuary';
 import Gallery from './components/Gallery';
 import FullGallery from './components/FullGallery';
 import Etiquette from './components/Etiquette';
@@ -54,6 +55,9 @@ export default function App() {
 
             {/* About Section */}
             <About />
+
+            {/* The Sanctuary (Background Video Showcase) */}
+            <Sanctuary />
 
             {/* Rates & What's Included Section */}
             <Rates />
