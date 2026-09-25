@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Experience from './components/Experience';
 import Rates from './components/Rates';
 import Sanctuary from './components/Sanctuary';
 import Gallery from './components/Gallery';
@@ -55,6 +56,9 @@ export default function App() {
 
             {/* About Section */}
             <About />
+
+            {/* The Experience (4-Step Journey) */}
+            <Experience />
 
             {/* The Sanctuary (Background Video Showcase) */}
             <Sanctuary />
