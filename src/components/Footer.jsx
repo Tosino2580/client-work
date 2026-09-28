@@ -73,6 +73,15 @@ export default function Footer({ onNavigate }) {
               </li>
               <li>
                 <a
+                  href="#policy"
+                  onClick={(e) => handleLinkClick(e, '#policy')}
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
+                  Policy
+                </a>
+              </li>
+              <li>
+                <a
                   href="#contact"
                   onClick={(e) => handleLinkClick(e, '#contact')}
                   className="text-gray-400 hover:text-white transition-colors duration-200"

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: transparent;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 30px 40px;
+    }
+    .emblem {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #121316;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+    .emblem svg {
+      width: 46px;
+      height: 46px;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #121316;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+    }
+    .brand-sub {
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.32em;
+      font-weight: 700;
+      color: #cf6e5b;
+      margin-top: 3px;
+    }
+    /* Dark variant */
+    .dark-card {
+      background: #090a0d;
+      border-radius: 24px;
+    }
+    .dark-card .emblem {
+      background: #ffffff;
+    }
+    .dark-card .brand-name {
+      color: #ffffff;
+    }
+    .dark-card .brand-sub {
+      color: #e28775;
+    }
+    /* Emblem only */
+    .emblem-only {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: #121316;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    }
+    .emblem-only svg {
+      width: 210px;
+      height: 210px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Full Logo -->
+  <div id="logo-full" class="wrapper">
+    <div class="emblem">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 20 C50 38 32 46 22 58 C16 65 19 78 30 80 C40 82 46 72 50 64 C54 72 60 82 70 80 C81 78 84 65 78 58 C68 46 50 38 50 20 Z" fill="#FFFFFF" fill-opacity="0.14" />
+        <path d="M50 24 V65" stroke="#FFFFFF" stroke-width="3" />
+        <path d="M50 44 C42 48 34 54 30 64" stroke="#FFFFFF" />
+        <path d="M50 44 C58 48 66 54 70 64" stroke="#FFFFFF" />
+        <circle cx="50" cy="20" r="3" fill="#FFFFFF" />
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">Kasie</span>
+      <span class="brand-sub">BodyWork</span>
+    </div>
+  </div>
+</body>
+</html>

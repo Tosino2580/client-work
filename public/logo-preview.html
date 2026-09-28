@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kasie BodyWork - Official Brand Logos & Assets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0c0d11;
+      color: #e5e7eb;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      padding: 40px 20px 80px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #cf6e5b;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    p.lead {
+      color: #9ca3af;
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 30px;
+    }
+    @media (max-width: 540px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: #14161c;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f3f4f6;
+    }
+    .card-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(207, 110, 91, 0.15);
+      color: #e28775;
+      font-weight: 600;
+    }
+    .preview-box {
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 30px;
+    }
+    .preview-light {
+      background: #FAF6F0;
+    }
+    .preview-dark {
+      background: #090a0d;
+    }
+    .preview-transparent {
+      background: repeating-conic-gradient(#1c1e26 0% 25%, #14161f 0% 50%) 50% / 20px 20px;
+    }
+    .card-footer {
+      padding: 20px 24px;
+      background: #111218;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #e28775, #cf6e5b);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(207, 110, 91, 0.3);
+    }
+    .btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #e5e7eb;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+    }
+    .canvas-hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Official Brand Assets</span>
+      <h1>Kasie BodyWork Logos</h1>
+      <p class="lead">Download the navbar logo and standalone emblems in high-resolution vector SVG and transparent PNG formats.</p>
+    </header>
+
+    <div class="grid">
+      <!-- 1. Full Logo - Dark Variant -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Full Logo (Dark Text / Warm Light Backing)</span>
+          <span class="card-tag">For Light Backgrounds</span>
+        </div>
+        <div class="preview-box preview-light">
+          <img id="img-logo-dark" src="/logo.svg" alt="Kasie BodyWork Full Logo Dark" style="max-width: 100%; height: auto; max-height: 80px;" />
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="downloadPNG('logo-dark-svg', 'kasie-bodywork-logo-dark.png', 1120, 280)">
+            Download High-Res PNG
+          </button>
+          <a class="btn btn-secondary" href="/logo.svg" download="kasie-bodywork-logo-dark.svg">
+            Download SVG
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Full Logo - Light Variant -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Full Logo (White Text / Dark Backing)</span>
+          <span class="card-tag">For Dark Backgrounds</span>
+        </div>
+        <div class="preview-box preview-dark">
+          <img id="img-logo-white" src="/logo-white.svg" alt="Kasie BodyWork Full Logo White" style="max-width: 100%; height: auto; max-height: 80px;" />
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="downloadPNG('logo-white-svg', 'kasie-bodywork-logo-white.png', 1120, 280)">
+            Download High-Res PNG
+          </button>
+          <a class="btn btn-secondary" href="/logo-white.svg" download="kasie-bodywork-logo-white.svg">
+            Download SVG
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Circular Emblem (Dark Motif) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Circular Emblem Icon (Dark Circle)</span>
+          <span class="card-tag">Social / Avatar / Favicon</span>
+        </div>
+        <div class="preview-box preview-light">
+          <img id="img-emblem-dark" src="/logo-emblem.svg" alt="Kasie BodyWork Emblem" style="width: 120px; height: 120px;" />
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="downloadPNG('emblem-dark-svg', 'kasie-bodywork-emblem.png', 1000, 1000)">
+            Download High-Res PNG
+          </button>
+          <a class="btn btn-secondary" href="/logo-emblem.svg" download="kasie-bodywork-emblem.svg">
+            Download SVG
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Circular Emblem (White Motif) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Circular Emblem Icon (White Circle)</span>
+          <span class="card-tag">App Icon / Dark Header</span>
+        </div>
+        <div class="preview-box preview-dark">
+          <div style="width: 120px; height: 120px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+            <svg viewBox="0 0 100 100" width="80" height="80" fill="none" stroke="#121316" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M50 20 C50 38 32 46 22 58 C16 65 19 78 30 80 C40 82 46 72 50 64 C54 72 60 82 70 80 C81 78 84 65 78 58 C68 46 50 38 50 20 Z" fill="#121316" fill-opacity="0.14" />
+              <path d="M50 24 V65" stroke="#121316" stroke-width="3" />
+              <path d="M50 44 C42 48 34 54 30 64" stroke="#121316" />
+              <path d="M50 44 C58 48 66 54 70 64" stroke="#121316" />
+              <circle cx="50" cy="20" r="3" fill="#121316" />
+            </svg>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="downloadPNG('emblem-white-svg', 'kasie-bodywork-emblem-white.png', 1000, 1000)">
+            Download High-Res PNG
+          </button>
+          <a class="btn btn-secondary" href="/favicon.svg" download="kasie-bodywork-emblem-white.svg">
+            Download SVG
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden templates for client-side rasterization -->
+  <div style="display: none;">
+    <div id="logo-dark-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" width="1120" height="280">
+        <defs>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Plus+Jakarta+Sans:wght@700&amp;display=swap');
+            .t1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; fill: #121316; }
+            .t2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 3.6px; fill: #cf6e5b; }
+          </style>
+        </defs>
+        <g transform="translate(8, 7)">
+          <circle cx="28" cy="28" r="28" fill="#121316" />
+          <g transform="translate(28, 28) scale(0.42) translate(-50, -50)" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M50 20 C50 38 32 46 22 58 C16 65 19 78 30 80 C40 82 46 72 50 64 C54 72 60 82 70 80 C81 78 84 65 78 58 C68 46 50 38 50 20 Z" fill="#FFFFFF" fill-opacity="0.16" />
+            <path d="M50 24 V65" stroke="#FFFFFF" stroke-width="4" />
+            <path d="M50 44 C42 48 34 54 30 64" stroke="#FFFFFF" />
+            <path d="M50 44 C58 48 66 54 70 64" stroke="#FFFFFF" />
+            <circle cx="50" cy="20" r="4" fill="#FFFFFF" />
+          </g>
+        </g>
+        <text x="76" y="38" class="t1">Kasie</text>
+        <text x="77" y="55" class="t2">BODYWORK</text>
+      </svg>
+    </div>
+
+    <div id="logo-white-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" width="1120" height="280">
+        <defs>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Plus+Jakarta+Sans:wght@700&amp;display=swap');
+            .w1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; fill: #FFFFFF; }
+            .w2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 3.6px; fill: #e28775; }
+          </style>
+        </defs>
+        <g transform="translate(8, 7)">
+          <circle cx="28" cy="28" r="28" fill="#FFFFFF" />
+          <g transform="translate(28, 28) scale(0.42) translate(-50, -50)" fill="none" stroke="#121316" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M50 20 C50 38 32 46 22 58 C16 65 19 78 30 80 C40 82 46 72 50 64 C54 72 60 82 70 80 C81 78 84 65 78 58 C68 46 50 38 50 20 Z" fill="#121316" fill-opacity="0.14" />
+            <path d="M50 24 V65" stroke="#121316" stroke-width="4" />
+            <path d="M50 44 C42 48 34 54 30 64" stroke="#121316" />
+            <path d="M50 44 C58 48 66 54 70 64" stroke="#121316" />
+            <circle cx="50" cy="20" r="4" fill="#121316" />
+          </g>
+        </g>
+        <text x="76" y="38" class="w1">Kasie</text>
+        <text x="77" y="55" class="w2">BODYWORK</text>
+      </svg>
+    </div>
+
+    <div id="emblem-dark-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1000" height="1000">
+        <circle cx="50" cy="50" r="48" fill="#121316" />
+        <g fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 20 C50 38 32 46 22 58 C16 65 19 78 30 80 C40 82 46 72 50 64 C54 72 60 82 70 80 C81 78 84 65 78 58 C68 46 50 38 50 20 Z" fill="#FFFFFF" fill-opacity="0.14" />
+          <path d="M50 24 V65" stroke="#FFFFFF" stroke-width="3" />
+          <path d="M50 44 C42 48 34 54 30 64" stroke="#FFFFFF" />
+          <path d="M50 44 C58 48 66 54 70 64" stroke="#FFFFFF" />
+          <circle cx="50" cy="20" r="3" fill="#FFFFFF" />
+        </g>
+      </svg>
+    </div>
+
+    <div id="emblem-white-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1000" height="1000">
+        <circle cx="50" cy="50" r="48" fill="#FFFFFF" />
+        <g fill="none" stroke="#121316" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 20 C50 38 32 46 22 58 C16 65 19 78 30 80 C40 82 46 72 50 64 C54 72 60 82 70 80 C81 78 84 65 78 58 C68 46 50 38 50 20 Z" fill="#121316" fill-opacity="0.14" />
+          <path d="M50 24 V65" stroke="#121316" stroke-width="3" />
+          <path d="M50 44 C42 48 34 54 30 64" stroke="#121316" />
+          <path d="M50 44 C58 48 66 54 70 64" stroke="#121316" />
+          <circle cx="50" cy="20" r="3" fill="#121316" />
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    function downloadPNG(elementId, filename, width, height) {
+      const container = document.getElementById(elementId);
+      const svgElement = container.querySelector('svg');
+      const svgString = new XMLSerializer().serializeToString(svgElement);
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const URL = window.URL || window.webkitURL || window;
+      const blobURL = URL.createObjectURL(svgBlob);
+      
+      const image = new Image();
+      image.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, width, height);
+        context.drawImage(image, 0, 0, width, height);
+        
+        const pngURL = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.download = filename;
+        downloadLink.href = pngURL;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(blobURL);
+      };
+      image.src = blobURL;
+    }
+  </script>
+</body>
+</html>

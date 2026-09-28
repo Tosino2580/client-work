@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { ChevronRight, Mail, Copy, Check, Loader2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import PolicyModal from './PolicyModal';
 
 export default function Contact() {
   const [headerRef, headerVisible] = useScrollReveal(0.1);
@@ -21,6 +22,13 @@ export default function Contact() {
     message: '',
   });
 
+  // Policy modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  // What action to perform after the user clicks "I Agree"
+  // Either 'form' or { href: '...' } for external links
+  const [pendingAction, setPendingAction] = useState(null);
+
+  // --- Zangi copy (no policy needed, it's just a copy) ---
   const handleCopyZangi = (e) => {
     e.preventDefault();
     navigator.clipboard.writeText('27-8269-4595');
@@ -28,21 +36,55 @@ export default function Contact() {
     setTimeout(() => setCopiedZangi(false), 2000);
   };
 
-  const handleSubmit = async (e) => {
+  // --- Intercept channel link clicks ---
+  const handleChannelClick = (e, href) => {
+    e.preventDefault();
+    setPendingAction({ href });
+    setModalOpen(true);
+  };
+
+  // --- Intercept form submit ---
+  const handleFormSubmitAttempt = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email) return;
+    setPendingAction('form');
+    setModalOpen(true);
+  };
 
+  // --- After "I Agree" is clicked ---
+  const handleAgree = () => {
+    setModalOpen(false);
+
+    if (!pendingAction) return;
+
+    if (pendingAction === 'form') {
+      // Now actually send the form
+      sendForm();
+    } else if (pendingAction.href) {
+      // Open the channel link
+      window.open(pendingAction.href, '_blank', 'noopener,noreferrer');
+    }
+    setPendingAction(null);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setPendingAction(null);
+  };
+
+  // --- Actual email send (called only after policy is agreed) ---
+  const sendForm = async () => {
     setFormStatus('sending');
 
     const templateParams = {
-      from_name:    formData.name,
-      from_email:   formData.email,
-      phone:        formData.phone   || 'Not provided',
-      address:      formData.address || 'Not provided',
-      city:         formData.city    || 'Not provided',
-      state:        formData.state   || 'Not provided',
-      zip:          formData.zip     || 'Not provided',
-      message:      formData.message || 'No message',
+      from_name:  formData.name,
+      from_email: formData.email,
+      phone:      formData.phone   || 'Not provided',
+      address:    formData.address || 'Not provided',
+      city:       formData.city    || 'Not provided',
+      state:      formData.state   || 'Not provided',
+      zip:        formData.zip     || 'Not provided',
+      message:    formData.message || 'No message',
     };
 
     try {
@@ -131,54 +173,106 @@ export default function Contact() {
   ];
 
   return (
-    <section
-      id="contact"
-      className="relative w-full bg-[#FAF6F0] text-[#1c1c1f] py-16 sm:py-24 px-5 sm:px-10 lg:px-14 overflow-hidden border-t border-[#ede7de]"
-    >
-      {/* Centered Header */}
-      <div
-        ref={headerRef}
-        className={`max-w-4xl mx-auto text-center mb-12 sm:mb-16 reveal-on-scroll ${
-          headerVisible ? 'reveal-visible' : ''
-        }`}
-      >
-        <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-[#cf6e5b] block mb-2">
-          LET&apos;S CONNECT
-        </span>
-        <h2 className="font-serif-luxury text-3xl sm:text-5xl md:text-[54px] font-bold text-[#121316] tracking-tight">
-          Contact Me
-        </h2>
-        {/* Subtle accent horizontal divider */}
-        <div className="w-12 h-[2px] bg-[#cf6e5b]/40 mx-auto mt-4 mb-4" />
-        <p className="max-w-md mx-auto text-sm sm:text-base text-[#5c5e66] leading-relaxed px-2">
-          Ready to book your session or have a question? Reach out through any of the channels below.
-        </p>
-      </div>
+    <>
+      {/* Policy Confirmation Modal */}
+      <PolicyModal
+        isOpen={modalOpen}
+        onAgree={handleAgree}
+        onClose={handleModalClose}
+      />
 
-      {/* Two Column Grid - EQUAL WIDTH CONTAINERS CENTERED IN SCREEN */}
-      <div
-        ref={contentRef}
-        className={`max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8 items-start reveal-on-scroll delay-100 ${
-          contentVisible ? 'reveal-visible' : ''
-        }`}
+      <section
+        id="contact"
+        className="relative w-full bg-[#FAF6F0] text-[#1c1c1f] py-16 sm:py-24 px-5 sm:px-10 lg:px-14 overflow-hidden border-t border-[#ede7de]"
       >
-        {/* Left Column: Direct Channels (Equal 50% width) */}
-        <div className="w-full bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-[#ede6db]">
-          <h3 className="font-bold text-lg text-[#121316] mb-5 sm:mb-6">
-            Direct Channels
-          </h3>
+        {/* Centered Header */}
+        <div
+          ref={headerRef}
+          className={`max-w-4xl mx-auto text-center mb-12 sm:mb-16 reveal-on-scroll ${
+            headerVisible ? 'reveal-visible' : ''
+          }`}
+        >
+          <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-[#cf6e5b] block mb-2">
+            LET&apos;S CONNECT
+          </span>
+          <h2 className="font-serif-luxury text-3xl sm:text-5xl md:text-[54px] font-bold text-[#121316] tracking-tight">
+            Contact Me
+          </h2>
+          {/* Subtle accent horizontal divider */}
+          <div className="w-12 h-[2px] bg-[#cf6e5b]/40 mx-auto mt-4 mb-4" />
+          <p className="max-w-md mx-auto text-sm sm:text-base text-[#5c5e66] leading-relaxed px-2">
+            Ready to book your session or have a question? Reach out through any of the channels below.
+          </p>
 
-          <div className="space-y-1 sm:space-y-1.5">
-            {directChannels.map((channel) => {
-              if (channel.isCopy) {
+          {/* Policy Reminder Note */}
+          <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#cf6e5b]/10 border border-[#cf6e5b]/20 text-[11px] sm:text-xs font-medium text-[#cf6e5b]">
+            <svg className="w-3.5 h-3.5 fill-current flex-shrink-0" viewBox="0 0 24 24">
+              <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            A 50% deposit is required to confirm your booking. Policy details shown before you proceed.
+          </div>
+        </div>
+
+        {/* Two Column Grid */}
+        <div
+          ref={contentRef}
+          className={`max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8 items-start reveal-on-scroll delay-100 ${
+            contentVisible ? 'reveal-visible' : ''
+          }`}
+        >
+          {/* Left Column: Direct Channels */}
+          <div className="w-full bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-[#ede6db]">
+            <h3 className="font-bold text-lg text-[#121316] mb-1">
+              Direct Channels
+            </h3>
+            <p className="text-[11px] text-gray-400 mb-5">
+              Tapping any channel will show the booking policy first.
+            </p>
+
+            <div className="space-y-1 sm:space-y-1.5">
+              {directChannels.map((channel) => {
+                // Zangi — copy action, no modal needed
+                if (channel.isCopy) {
+                  return (
+                    <button
+                      key={channel.name}
+                      type="button"
+                      onClick={handleCopyZangi}
+                      className="w-full flex items-center justify-between py-3 px-3 sm:px-3.5 rounded-2xl hover:bg-[#FAF6F0] active:bg-[#f4eee6] transition-colors group cursor-pointer text-left"
+                    >
+                      <div className="flex items-center gap-3 sm:gap-3.5">
+                        <div className={`w-9 h-9 rounded-full ${channel.bgColor} flex items-center justify-center shadow-xs flex-shrink-0`}>
+                          {channel.icon}
+                        </div>
+                        <div className="min-w-0">
+                          <span className="text-[11px] uppercase tracking-wider text-gray-400 block font-medium">
+                            {channel.name}
+                          </span>
+                          <span className="text-xs sm:text-sm font-semibold text-[#121316] group-hover:text-[#cf6e5b] transition-colors truncate block">
+                            {channel.value}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-gray-400 group-hover:text-[#cf6e5b] transition-colors pr-1 flex-shrink-0">
+                        {copiedZangi ? (
+                          <Check className="w-4 h-4 text-emerald-600" />
+                        ) : (
+                          <Copy className="w-4 h-4" />
+                        )}
+                      </div>
+                    </button>
+                  );
+                }
+
+                // All other channels — show policy modal first
                 return (
-                  <button
+                  <a
                     key={channel.name}
-                    type="button"
-                    onClick={handleCopyZangi}
-                    className="w-full flex items-center justify-between py-3 px-3 sm:px-3.5 rounded-2xl hover:bg-[#FAF6F0] active:bg-[#f4eee6] transition-colors group cursor-pointer text-left"
+                    href={channel.href}
+                    onClick={(e) => handleChannelClick(e, channel.href)}
+                    className="flex items-center justify-between py-3 px-3 sm:px-3.5 rounded-2xl hover:bg-[#FAF6F0] active:bg-[#f4eee6] transition-colors group cursor-pointer"
                   >
-                    <div className="flex items-center gap-3 sm:gap-3.5">
+                    <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
                       <div className={`w-9 h-9 rounded-full ${channel.bgColor} flex items-center justify-center shadow-xs flex-shrink-0`}>
                         {channel.icon}
                       </div>
@@ -191,201 +285,162 @@ export default function Contact() {
                         </span>
                       </div>
                     </div>
-                    <div className="text-gray-400 group-hover:text-[#cf6e5b] transition-colors pr-1 flex-shrink-0">
-                      {copiedZangi ? (
-                        <Check className="w-4 h-4 text-emerald-600" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </div>
-                  </button>
+                    <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-[#cf6e5b] group-hover:translate-x-0.5 transition-all pr-1 flex-shrink-0" />
+                  </a>
                 );
-              }
+              })}
+            </div>
+          </div>
 
-              return (
-                <a
-                  key={channel.name}
-                  href={channel.href}
-                  target={channel.href.startsWith('http') ? '_blank' : undefined}
-                  rel={channel.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center justify-between py-3 px-3 sm:px-3.5 rounded-2xl hover:bg-[#FAF6F0] active:bg-[#f4eee6] transition-colors group cursor-pointer"
+          {/* Right Column: Send a Message Form */}
+          <div className="w-full bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-[#ede6db]">
+            <h3 className="font-bold text-lg text-[#121316]">
+              Send a Message
+            </h3>
+            <p className="text-xs text-gray-400 mt-0.5 mb-5 sm:mb-6">
+              I&apos;ll get back to you as soon as possible.
+            </p>
+
+            {formStatus === 'success' && (
+              <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium animate-in fade-in">
+                ✅ Thank you! Your private inquiry has been sent to Kasie. She&apos;ll be in touch soon.
+              </div>
+            )}
+
+            {formStatus === 'error' && (
+              <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-medium animate-in fade-in">
+                ⚠️ Something went wrong. Please try reaching out directly via text or email instead.
+              </div>
+            )}
+
+            <form onSubmit={handleFormSubmitAttempt} className="space-y-3.5 sm:space-y-4">
+              {/* Name */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                />
+              </div>
+
+              {/* Phone Number */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  placeholder="+1 (555) 000-0000"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                />
+              </div>
+
+              {/* Address */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  placeholder="Street address"
+                  value={formData.address}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                />
+              </div>
+
+              {/* City / State / Zip row */}
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
+                <div className="sm:col-span-3">
+                  <label className="block text-xs font-medium text-gray-500 mb-1">City</label>
+                  <input
+                    type="text"
+                    placeholder="Your city"
+                    value={formData.city}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-medium text-gray-500 mb-1">State</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. CA"
+                    value={formData.state}
+                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                  />
+                </div>
+                <div className="sm:col-span-1">
+                  <label className="block text-xs font-medium text-gray-500 mb-1 whitespace-nowrap">Zip Code</label>
+                  <input
+                    type="text"
+                    placeholder="12345"
+                    value={formData.zip}
+                    onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
+                  />
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  Message
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="How can I help you?"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors resize-none"
+                />
+              </div>
+
+              {/* Send Message Button */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={formStatus === 'sending'}
+                  className="w-full py-3.5 px-6 rounded-full text-xs sm:text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[#e28775] to-[#cf6e5b] hover:from-[#efa394] hover:to-[#e28775] shadow-md shadow-[#cf6e5b]/25 hover:shadow-lg hover:shadow-[#cf6e5b]/35 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
                 >
-                  <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
-                    <div className={`w-9 h-9 rounded-full ${channel.bgColor} flex items-center justify-center shadow-xs flex-shrink-0`}>
-                      {channel.icon}
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[11px] uppercase tracking-wider text-gray-400 block font-medium">
-                        {channel.name}
-                      </span>
-                      <span className="text-xs sm:text-sm font-semibold text-[#121316] group-hover:text-[#cf6e5b] transition-colors truncate block">
-                        {channel.value}
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-[#cf6e5b] group-hover:translate-x-0.5 transition-all pr-1 flex-shrink-0" />
-                </a>
-              );
-            })}
+                  {formStatus === 'sending' ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending…</span>
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
-        {/* Right Column: Send a Message Form (Equal 50% width) */}
-        <div className="w-full bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-[#ede6db]">
-          <h3 className="font-bold text-lg text-[#121316]">
-            Send a Message
-          </h3>
-          <p className="text-xs text-gray-400 mt-0.5 mb-5 sm:mb-6">
-            I&apos;ll get back to you as soon as possible.
-          </p>
-
-          {formStatus === 'success' && (
-            <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium animate-in fade-in">
-              ✅ Thank you! Your private inquiry has been sent to Kasie. She'll be in touch soon.
-            </div>
-          )}
-
-          {formStatus === 'error' && (
-            <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-medium animate-in fade-in">
-              ⚠️ Something went wrong. Please try reaching out directly via text or email instead.
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
-            {/* Name */}
-            <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="Your name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                required
-                placeholder="john@example.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-              />
-            </div>
-
-            {/* Phone Number */}
-            <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                placeholder="+1 (555) 000-0000"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-              />
-            </div>
-
-            {/* Address */}
-            <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">
-                Address
-              </label>
-              <input
-                type="text"
-                placeholder="Street address"
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-              />
-            </div>
-
-            {/* City / State / Zip row */}
-            <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 sm:gap-4">
-              <div className="sm:col-span-3">
-                <label className="block text-xs font-medium text-gray-500 mb-1">
-                  City
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your city"
-                  value={formData.city}
-                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-gray-500 mb-1">
-                  State
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. CA"
-                  value={formData.state}
-                  onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-                />
-              </div>
-
-              <div className="sm:col-span-1">
-                <label className="block text-xs font-medium text-gray-500 mb-1 whitespace-nowrap">
-                  Zip Code
-                </label>
-                <input
-                  type="text"
-                  placeholder="12345"
-                  value={formData.zip}
-                  onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors"
-                />
-              </div>
-            </div>
-
-            {/* Message */}
-            <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">
-                Message
-              </label>
-              <textarea
-                rows={4}
-                placeholder="How can I help you?"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#cf6e5b] focus:ring-1 focus:ring-[#cf6e5b] text-sm text-[#121316] placeholder-gray-400 transition-colors resize-none"
-              />
-            </div>
-
-            {/* Send Message Button */}
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={formStatus === 'sending'}
-                className="w-full py-3.5 px-6 rounded-full text-xs sm:text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-[#e28775] to-[#cf6e5b] hover:from-[#efa394] hover:to-[#e28775] shadow-md shadow-[#cf6e5b]/25 hover:shadow-lg hover:shadow-[#cf6e5b]/35 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
-              >
-                {formStatus === 'sending' ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Sending…</span>
-                  </>
-                ) : (
-                  'Send Message'
-                )}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

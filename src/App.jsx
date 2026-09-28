@@ -8,6 +8,7 @@ import Sanctuary from './components/Sanctuary';
 import Gallery from './components/Gallery';
 import FullGallery from './components/FullGallery';
 import Etiquette from './components/Etiquette';
+import BookingPolicy from './components/BookingPolicy';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -71,6 +72,9 @@ export default function App() {
 
             {/* Etiquette & Expectations Section */}
             <Etiquette />
+
+            {/* Booking Policy Section */}
+            <BookingPolicy />
 
             {/* Contact Me Section */}
             <Contact />
