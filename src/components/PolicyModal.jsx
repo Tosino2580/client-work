@@ -59,7 +59,12 @@ export default function PolicyModal({ isOpen, onAgree, onClose }) {
 
             {/* Close Button */}
             <button
-              onClick={onClose}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onClose();
+              }}
               className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all duration-200 flex-shrink-0 mt-0.5"
               aria-label="Close"
             >
@@ -127,13 +132,23 @@ export default function PolicyModal({ isOpen, onAgree, onClose }) {
         {/* Footer CTA */}
         <div className="px-6 pb-6 pt-3 border-t border-[#ede7de] flex flex-col sm:flex-row gap-3">
           <button
-            onClick={onClose}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onClose();
+            }}
             className="sm:flex-1 py-3 px-5 rounded-full text-sm font-semibold text-[#555760] bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
           >
             Go Back
           </button>
           <button
-            onClick={onAgree}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onAgree();
+            }}
             className="sm:flex-[2] py-3 px-5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-[#e28775] to-[#cf6e5b] hover:from-[#efa394] hover:to-[#e28775] shadow-md shadow-[#cf6e5b]/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
           >
             <ShieldCheck className="w-4 h-4" />

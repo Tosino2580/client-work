@@ -61,8 +61,18 @@ export default function Contact() {
       // Now actually send the form
       sendForm();
     } else if (pendingAction.href) {
-      // Open the channel link
-      window.open(pendingAction.href, '_blank', 'noopener,noreferrer');
+      const href = pendingAction.href;
+      const isProtocol = href.startsWith('sms:') || href.startsWith('mailto:') || href.startsWith('tel:');
+
+      if (isProtocol) {
+        // Native protocols (SMS, Email) must be launched in the current context.
+        // Calling window.open with '_blank' causes mobile browsers (iOS/Android)
+        // to spawn an empty tab that redirects to the website homepage instead of opening the app.
+        window.location.href = href;
+      } else {
+        // Web URLs (WhatsApp, Telegram, Signal) can safely open in a new tab
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
     }
     setPendingAction(null);
   };
