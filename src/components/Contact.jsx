@@ -149,8 +149,8 @@ export default function Contact() {
     },
     {
       name: 'WhatsApp',
-      value: '+1 (438) 230-3163',
-      href: 'https://wa.me/14382303163',
+      value: '+1 (716) 287-0729',
+      href: 'https://wa.me/17162870729',
       bgColor: 'bg-green-50',
       icon: (
         <svg className="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24">
