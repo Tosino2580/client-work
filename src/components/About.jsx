@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import aboutImage from '../assets/thirteen.jpeg';
+import aboutImage from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.58.jpeg';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function About() {

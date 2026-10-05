@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import heroImage from '../assets/twelve.jpeg';
+import heroImage from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/hero.jpeg';
 
 export default function Hero() {
   // Subtle parallax on mouse move for the hero image

@@ -1,9 +1,9 @@
 import React from 'react';
-import tallImage from '../assets/three.jpeg';
-import gridImg1 from '../assets/two.jpeg';
-import gridImg2 from '../assets/three.jpeg';
-import gridImg3 from '../assets/twelve.jpeg';
-import gridImg4 from '../assets/ten.jpeg';
+import tallImage from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.57.jpeg';
+import gridImg1 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.58 (2).jpeg';
+import gridImg2 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.48.00.jpeg';
+import gridImg3 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.59 (2).jpeg';
+import gridImg4 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.59.jpeg';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function Gallery({ onViewFullGallery }) {

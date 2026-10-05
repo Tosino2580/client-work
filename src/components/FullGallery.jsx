@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 
-import img1 from '../assets/one.jpeg';
-import img2 from '../assets/two.jpeg';
-import img3 from '../assets/three.jpeg';
-import img4 from '../assets/four.jpeg';
-import img5 from '../assets/five.jpeg';
-import img6 from '../assets/six.jpeg';
-import img7 from '../assets/seven.jpeg';
-import img8 from '../assets/eight.jpeg';
-import img9 from '../assets/nine.jpeg';
-import img10 from '../assets/ten.jpeg';
-import img11 from '../assets/eleven.jpeg';
-import img12 from '../assets/twelve.jpeg';
-import img13 from '../assets/thirteen.jpeg';
+import img1 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/hero.jpeg';
+import img2 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.58.jpeg';
+import img3 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.58 (2).jpeg';
+import img4 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.57.jpeg';
+import img5 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.48.00.jpeg';
+import img6 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.59 (2).jpeg';
+import img7 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.59.jpeg';
+import img8 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.59 (1).jpeg';
+import img9 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.59 (3).jpeg';
+import img10 from '../assets/WhatsApp Unknown 2026-10-05 at 18.48.16/WhatsApp Image 2026-10-05 at 18.47.58 (1).jpeg';
 
 export default function FullGallery({ onBackToHome }) {
   const [selectedIdx, setSelectedIdx] = useState(null);
 
   const images = [
-    { src: img13, title: 'Intimate Radiance', tag: 'Portraits' },
-    { src: img3, title: 'Sensual Silhouette', tag: 'Collection' },
-    { src: img12, title: 'Butterfly Reverie', tag: 'Exclusive' },
-    { src: img2, title: 'Quiet Serenity', tag: 'Boudoir' },
-    { src: img10, title: 'Elegance in Motion', tag: 'Portraits' },
-    { src: img8, title: 'Cascading Tresses', tag: 'Collection' },
-    { src: img1, title: 'Alluring Curves', tag: 'Boudoir' },
-    { src: img9, title: 'Gentle Embrace', tag: 'Portraits' },
-    { src: img4, title: 'Sunlit Warmth', tag: 'Collection' },
-    { src: img5, title: 'Playful Reflection', tag: 'Moments' },
-    { src: img6, title: 'Pure Femininity', tag: 'Boudoir' },
-    { src: img7, title: 'Soft Awakening', tag: 'Collection' },
-    { src: img11, title: 'Tender Gaze', tag: 'Portraits' },
+    { src: img2, title: 'Radiant Glow', tag: 'Portraits' },
+    { src: img3, title: 'Golden Boudoir', tag: 'Boudoir' },
+    { src: img1, title: 'Private Sanctuary', tag: 'Exclusive' },
+    { src: img4, title: 'Quiet Sensuality', tag: 'Collection' },
+    { src: img5, title: 'Coastal Serenade', tag: 'Moments' },
+    { src: img6, title: 'Gentle Warmth', tag: 'Portraits' },
+    { src: img7, title: 'Ink & Silhouette', tag: 'Boudoir' },
+    { src: img8, title: 'Vanity Reverie', tag: 'Moments' },
+    { src: img9, title: 'Playful Intimacy', tag: 'Collection' },
+    { src: img10, title: 'Crimson Velvet', tag: 'Moments' },
   ];
 
   // Handle keyboard navigation for lightbox
